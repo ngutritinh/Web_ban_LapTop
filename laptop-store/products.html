@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sản Phẩm – LaptopZone</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body{background:#080b14;color:#e8f0fe;font-family:'Inter',sans-serif;}
+    .section-label{display:inline-flex;align-items:center;gap:10px;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#00f5ff;margin-bottom:12px;}
+    .section-label::before{content:'';width:32px;height:2px;background:#00f5ff;box-shadow:0 0 8px #00f5ff;}
+    .filter-btn{background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:6px;color:#94a3b8;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;padding:8px 18px;cursor:pointer;transition:.3s;}
+    .filter-btn:hover,.filter-btn.active{background:rgba(0,245,255,.1);border-color:#00f5ff;color:#00f5ff;}
+    .product-card{background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:12px;overflow:hidden;transition:.3s;position:relative;height:100%;}
+    .product-card:hover{border-color:rgba(0,245,255,.4);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(0,245,255,.08);}
+    .product-card:hover .product-img img{transform:scale(1.08);}
+    .product-img{height:200px;overflow:hidden;background:#0d1220;display:flex;align-items:center;justify-content:center;}
+    .product-img img{width:100%;height:100%;object-fit:cover;transition:.5s;}
+    .nav-link-custom{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;color:#94a3b8;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;text-decoration:none;transition:.3s;}
+    .nav-link-custom:hover,.nav-link-custom.active{color:#00f5ff;}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background:rgba(8,11,20,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,245,255,.15);padding:14px 0;z-index:1000;">
+  <div class="container">
+    <a href="index.html" style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;text-decoration:none;letter-spacing:2px;"><i class="fa-solid fa-laptop me-2"></i>Laptop<span style="color:#bf5fff">Zone</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" style="border:1px solid rgba(0,245,255,.2)"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li><a class="nav-link-custom" href="index.html">Trang Chủ</a></li>
+        <li><a class="nav-link-custom" href="about.html">Giới Thiệu</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link-custom dropdown-toggle" href="#" data-bs-toggle="dropdown">Dịch Vụ</a>
+          <ul class="dropdown-menu" style="background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:12px;padding:8px;">
+            <li><a class="dropdown-item" href="service1.html" style="color:#94a3b8;font-family:'Rajdhani',sans-serif;padding:10px 16px;border-radius:6px;"><i class="fa-solid fa-gamepad me-2" style="color:#00f5ff"></i>Laptop Gaming</a></li>
+            <li><a class="dropdown-item" href="service2.html" style="color:#94a3b8;font-family:'Rajdhani',sans-serif;padding:10px 16px;border-radius:6px;"><i class="fa-solid fa-briefcase me-2" style="color:#00f5ff"></i>Laptop Văn Phòng</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link-custom active" href="products.html">Sản Phẩm</a></li>
+        <li><a class="nav-link-custom" href="index.html#contact">Liên Hệ</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+        <button data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" style="width:38px;height:38px;background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cartCount" style="position:absolute;top:-6px;right:-6px;background:#ff2d78;color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;">0</span>
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#loginModal" style="background:transparent;border:2px solid #00f5ff;color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;border-radius:6px;cursor:pointer;">
+          <i class="fa-solid fa-user me-1"></i>Đăng Nhập
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE BANNER -->
+<div style="padding:120px 0 60px;background:#0d1220;border-bottom:1px solid rgba(0,245,255,.1);position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,#00f5ff,#bf5fff);"></div>
+  <div style="position:absolute;right:-5%;top:-30%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(0,245,255,.05) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="container">
+    <nav aria-label="breadcrumb" style="margin-bottom:14px;">
+      <ol class="breadcrumb" style="background:transparent;padding:0;margin:0;">
+        <li class="breadcrumb-item"><a href="index.html" style="color:#00f5ff;font-size:13px;text-decoration:none;">Trang Chủ</a></li>
+        <li class="breadcrumb-item active" style="color:#94a3b8;font-size:13px;">Sản Phẩm</li>
+      </ol>
+    </nav>
+    <div class="section-label">Danh sách</div>
+    <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(26px,4vw,48px);font-weight:900;">Tất Cả <span style="background:linear-gradient(135deg,#00f5ff,#bf5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Sản Phẩm</span></h1>
+  </div>
+</div>
+
+<!-- FILTER + PRODUCTS -->
+<section style="padding:60px 0;">
+  <div class="container">
+    <!-- Filter bar -->
+    <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-4">
+      <div class="d-flex flex-wrap gap-2">
+        <button class="filter-btn active" data-filter="all">Tất Cả</button>
+        <button class="filter-btn" data-filter="gaming">Gaming</button>
+        <button class="filter-btn" data-filter="office">Văn Phòng</button>
+        <button class="filter-btn" data-filter="design">Đồ Họa</button>
+        <button class="filter-btn" data-filter="student">Sinh Viên</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="color:#94a3b8;font-size:13px;" id="productCount">Hiển thị 8 sản phẩm</span>
+        <select id="sortSelect" style="background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:6px;color:#94a3b8;font-family:'Rajdhani',sans-serif;font-size:13px;padding:8px 14px;cursor:pointer;">
+          <option value="default">Sắp xếp mặc định</option>
+          <option value="price-asc">Giá thấp → cao</option>
+          <option value="price-desc">Giá cao → thấp</option>
+          <option value="name">Tên A → Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row g-4" id="productGrid">
+
+      <!-- Product 1 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="gaming" data-price="38900000" data-name="ASUS ROG Strix G16">
+        <div class="product-card">
+          <span style="position:absolute;top:12px;left:12px;background:#ff2d78;color:#fff;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:4px;z-index:2;">HOT</span>
+          <div class="product-img"><img src="images/products/laptop1.jpg" alt="ASUS ROG Strix G16" onerror="this.src='https://via.placeholder.com/400x200/0d1220/00f5ff?text=ASUS+ROG'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">ASUS ROG Strix G16</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Intel i9 | RTX 4070 | 32GB | 1TB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">45.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">38.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★★ (128)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:1,name:'ASUS ROG Strix G16',price:38900000,img:'images/products/laptop1.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="office" data-price="52900000" data-name="MacBook Pro M3">
+        <div class="product-card">
+          <span style="position:absolute;top:12px;left:12px;background:#00ff88;color:#080b14;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:4px;z-index:2;">NEW</span>
+          <div class="product-img"><img src="images/products/laptop2.jpg" alt="MacBook Pro M3" onerror="this.src='https://via.placeholder.com/400x200/0d1220/bf5fff?text=MacBook+Pro'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">MacBook Pro M3 14"</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Apple M3 Pro | 18GB | 512GB SSD</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">58.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">52.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★★ (256)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:2,name:'MacBook Pro M3',price:52900000,img:'images/products/laptop2.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="design" data-price="32500000" data-name="Dell XPS 15">
+        <div class="product-card">
+          <span style="position:absolute;top:12px;left:12px;background:#bf5fff;color:#fff;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:4px;z-index:2;">SALE</span>
+          <div class="product-img"><img src="images/products/laptop3.jpg" alt="Dell XPS 15" onerror="this.src='https://via.placeholder.com/400x200/0d1220/ff2d78?text=Dell+XPS'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">Dell XPS 15 OLED</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Intel i7 | RTX 3050 | 16GB | 512GB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">38.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">32.500.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★☆ (89)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:3,name:'Dell XPS 15 OLED',price:32500000,img:'images/products/laptop3.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="gaming" data-price="27900000" data-name="Lenovo Legion 5 Pro">
+        <div class="product-card">
+          <div class="product-img"><img src="images/products/laptop4.jpg" alt="Lenovo Legion 5" onerror="this.src='https://via.placeholder.com/400x200/0d1220/ffd600?text=Lenovo+Legion'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">Lenovo Legion 5 Pro</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">AMD R7 | RTX 4060 | 16GB | 1TB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">32.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">27.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★★ (167)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:4,name:'Lenovo Legion 5 Pro',price:27900000,img:'images/products/laptop4.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="student" data-price="15900000" data-name="Acer Aspire 5">
+        <div class="product-card">
+          <div class="product-img"><img src="images/products/laptop5.jpg" alt="Acer Aspire 5" onerror="this.src='https://via.placeholder.com/400x200/0d1220/00ff88?text=Acer+Aspire'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">Acer Aspire 5 2024</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Intel i5 | Intel Iris Xe | 8GB | 512GB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">18.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">15.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★☆ (74)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:5,name:'Acer Aspire 5 2024',price:15900000,img:'images/products/laptop5.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="office" data-price="22900000" data-name="HP EliteBook 840">
+        <div class="product-card">
+          <span style="position:absolute;top:12px;left:12px;background:#ff2d78;color:#fff;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:4px;z-index:2;">HOT</span>
+          <div class="product-img"><img src="images/products/laptop6.jpg" alt="HP EliteBook 840" onerror="this.src='https://via.placeholder.com/400x200/0d1220/bf5fff?text=HP+EliteBook'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">HP EliteBook 840 G10</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Intel i7 | Intel Iris Xe | 16GB | 512GB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">26.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">22.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★★ (112)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:6,name:'HP EliteBook 840 G10',price:22900000,img:'images/products/laptop6.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="gaming" data-price="44900000" data-name="MSI Raider GE78">
+        <div class="product-card">
+          <span style="position:absolute;top:12px;left:12px;background:#00ff88;color:#080b14;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:4px;z-index:2;">NEW</span>
+          <div class="product-img"><img src="images/products/laptop7.jpg" alt="MSI Raider" onerror="this.src='https://via.placeholder.com/400x200/0d1220/ff2d78?text=MSI+Raider'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">MSI Raider GE78 HX</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Intel i9 | RTX 4080 | 32GB | 2TB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">52.000.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">44.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★★ (43)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:7,name:'MSI Raider GE78 HX',price:44900000,img:'images/products/laptop7.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="col-lg-3 col-md-6 product-item" data-category="student" data-price="12900000" data-name="Asus VivoBook 15">
+        <div class="product-card">
+          <div class="product-img"><img src="images/products/laptop8.jpg" alt="Asus VivoBook" onerror="this.src='https://via.placeholder.com/400x200/0d1220/ffd600?text=Asus+VivoBook'"/></div>
+          <div style="padding:20px;">
+            <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;">Asus VivoBook 15 2024</div>
+            <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">AMD R5 | AMD Radeon | 8GB | 256GB</div>
+            <div style="color:#4a5568;font-size:12px;text-decoration:line-through;margin-bottom:2px;">14.500.000₫</div>
+            <div style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;text-shadow:0 0 10px rgba(0,245,255,.4);margin-bottom:6px;">12.900.000₫</div>
+            <div style="color:#ffd600;font-size:12px;margin-bottom:14px;">★★★★☆ (95)</div>
+            <div class="d-flex gap-2">
+              <a href="product-detail.html" style="flex:1;text-align:center;background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+              <button onclick="addToCart({id:8,name:'Asus VivoBook 15 2024',price:12900000,img:'images/products/laptop8.jpg'})" style="flex:1;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px;border-radius:6px;cursor:pointer;">
+                <i class="fa-solid fa-cart-plus me-1"></i>Giỏ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /productGrid -->
+    <!-- No results message -->
+    <div id="noResults" style="display:none;text-align:center;padding:60px 0;color:#4a5568;">
+      <i class="fa-solid fa-box-open" style="font-size:48px;margin-bottom:16px;display:block;color:rgba(0,245,255,.2);"></i>
+      Không tìm thấy sản phẩm phù hợp
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0d1220;border-top:1px solid rgba(0,245,255,.1);padding:60px 0 0;position:relative;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(135deg,#00f5ff,#bf5fff);"></div>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4"><a href="index.html" style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;text-decoration:none;display:inline-block;margin-bottom:12px;"><i class="fa-solid fa-laptop me-2"></i>Laptop<span style="color:#bf5fff">Zone</span></a><p style="color:#94a3b8;font-size:14px;line-height:1.8;margin-bottom:20px;">Chuyên cung cấp laptop chính hãng, bảo hành toàn quốc.</p>
+        <div style="display:flex;gap:10px;">
+          <a href="#" style="width:38px;height:38px;background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#94a3b8;text-decoration:none;font-size:15px;transition:.3s;"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" style="width:38px;height:38px;background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#94a3b8;text-decoration:none;font-size:15px;transition:.3s;"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" style="width:38px;height:38px;background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#94a3b8;text-decoration:none;font-size:15px;transition:.3s;"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-6"><p style="font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#00f5ff;margin-bottom:16px;">Liên Kết</p><ul style="list-style:none;padding:0;"><li style="margin-bottom:8px;"><a href="index.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Trang Chủ</a></li><li style="margin-bottom:8px;"><a href="about.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Giới Thiệu</a></li><li><a href="index.html#contact" style="color:#94a3b8;font-size:14px;text-decoration:none;">Liên Hệ</a></li></ul></div>
+      <div class="col-lg-2 col-6"><p style="font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#00f5ff;margin-bottom:16px;">Danh Mục</p><ul style="list-style:none;padding:0;"><li style="margin-bottom:8px;"><a href="service1.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Laptop Gaming</a></li><li style="margin-bottom:8px;"><a href="service2.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Laptop Văn Phòng</a></li><li><a href="products.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Tất Cả Sản Phẩm</a></li></ul></div>
+      <div class="col-lg-4"><p style="font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#00f5ff;margin-bottom:16px;">Liên Hệ</p><p style="color:#94a3b8;font-size:13px;margin-bottom:8px;"><i class="fa-solid fa-phone me-2" style="color:#00f5ff;"></i>1900 1234</p><p style="color:#94a3b8;font-size:13px;margin-bottom:8px;"><i class="fa-solid fa-envelope me-2" style="color:#00f5ff;"></i>support@laptopzone.vn</p><p style="color:#94a3b8;font-size:13px;"><i class="fa-solid fa-clock me-2" style="color:#00f5ff;"></i>T2–CN: 8:00 – 21:00</p></div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(0,245,255,.1);padding:20px 0;margin-top:40px;text-align:center;color:#4a5568;font-size:13px;">© <span id="yr"></span> <span style="color:#00f5ff;">LaptopZone</span>. Bảo lưu mọi quyền.</div>
+</footer>
+
+<!-- CART OFFCANVAS -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="background:#111827;border-left:1px solid rgba(0,245,255,.15);max-width:400px;">
+  <div class="offcanvas-header" style="border-bottom:1px solid rgba(0,245,255,.1);padding:20px 24px;">
+    <h5 style="font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;margin:0;"><i class="fa-solid fa-cart-shopping me-2"></i>Giỏ Hàng</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" id="cartBody" style="padding:20px;">
+    <div id="cartEmpty" class="text-center py-5"><i class="fa-solid fa-cart-shopping" style="font-size:48px;color:rgba(0,245,255,.2);"></i><p style="color:#4a5568;margin-top:16px;font-size:14px;">Giỏ hàng đang trống</p></div>
+    <div id="cartItems"></div>
+  </div>
+  <div id="cartFooter" style="padding:16px 24px 24px;display:none;">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid rgba(0,245,255,.1);font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;"><span>Tổng:</span><span id="cartTotal" style="color:#00f5ff;font-size:22px;"></span></div>
+    <button style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px;border-radius:6px;cursor:pointer;width:100%;margin-bottom:10px;"><i class="fa-solid fa-credit-card me-2"></i>Thanh Toán</button>
+    <button id="clearCartBtn" style="background:transparent;border:1px solid rgba(255,45,120,.3);color:#ff2d78;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px;border-radius:6px;cursor:pointer;width:100%;"><i class="fa-solid fa-trash me-2"></i>Xóa Giỏ</button>
+  </div>
+</div>
+
+<!-- MODAL ĐĂNG NHẬP -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background:#111827;border:1px solid rgba(0,245,255,.2);border-radius:16px;">
+      <div class="modal-header" style="border-bottom:1px solid rgba(0,245,255,.1);padding:24px 28px;">
+        <h5 class="modal-title" style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;"><i class="fa-solid fa-user-shield me-2" style="color:#00f5ff;"></i>Đăng Nhập</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="padding:28px;">
+        <form id="loginForm" novalidate>
+          <div class="mb-3"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Email</label><input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="email@example.com" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="loginEmailErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+          <div class="mb-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Mật Khẩu</label><input type="password" class="form-control" name="loginPass" id="loginPass" placeholder="Nhập mật khẩu" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="loginPassErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+          <button type="submit" style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px;border-radius:6px;cursor:pointer;width:100%;"><i class="fa-solid fa-right-to-bracket me-2"></i>Đăng Nhập</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="backToTop" style="position:fixed;bottom:32px;right:32px;width:44px;height:44px;background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);border-radius:10px;color:#00f5ff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(12px);transition:.3s;z-index:999;"><i class="fa-solid fa-chevron-up"></i></button>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+$('#yr').text(new Date().getFullYear());
+// Filter
+$('.filter-btn').on('click', function(){
+  $('.filter-btn').removeClass('active');
+  $(this).addClass('active');
+  var filter = $(this).data('filter');
+  var items = $('.product-item');
+  var shown = 0;
+  items.each(function(){
+    if(filter === 'all' || $(this).data('category') === filter){
+      $(this).show(); shown++;
+    } else { $(this).hide(); }
+  });
+  $('#productCount').text('Hiển thị ' + shown + ' sản phẩm');
+  $('#noResults').toggle(shown === 0);
+});
+// Sort
+$('#sortSelect').on('change', function(){
+  var val = $(this).val();
+  var grid = $('#productGrid');
+  var items = grid.find('.product-item').toArray();
+  items.sort(function(a, b){
+    if(val === 'price-asc') return $(a).data('price') - $(b).data('price');
+    if(val === 'price-desc') return $(b).data('price') - $(a).data('price');
+    if(val === 'name') return $(a).data('name').localeCompare($(b).data('name'));
+    return 0;
+  });
+  $.each(items, function(i, item){ grid.append(item); });
+});
+// Navbar scroll
+$(window).on('scroll', function(){
+  if($(this).scrollTop() > 60){ $('#backToTop').css({opacity:1,pointerEvents:'auto',transform:'translateY(0)'}); }
+  else { $('#backToTop').css({opacity:0,pointerEvents:'none',transform:'translateY(12px)'}); }
+});
+$('#backToTop').on('click', function(){ $('html,body').animate({scrollTop:0},500); });
+</script>
+</body>
+</html>
