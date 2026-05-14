@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laptop Gaming – LaptopZone</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body{background:#080b14;color:#e8f0fe;font-family:'Inter',sans-serif;}
+    .nav-lc{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;color:#94a3b8;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;text-decoration:none;transition:.3s;}
+    .nav-lc:hover,.nav-lc.active{color:#00f5ff;}
+    .section-label{display:inline-flex;align-items:center;gap:10px;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#00f5ff;margin-bottom:12px;}
+    .section-label::before{content:'';width:32px;height:2px;background:#00f5ff;box-shadow:0 0 8px #00f5ff;}
+    /* Sidebar */
+    .sidebar-widget{background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:12px;overflow:hidden;margin-bottom:24px;}
+    .sidebar-title{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00f5ff;padding:16px 20px;border-bottom:1px solid rgba(0,245,255,.1);background:rgba(0,245,255,.04);}
+    .sidebar-link{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;color:#94a3b8;font-size:14px;text-decoration:none;transition:.3s;border-left:3px solid transparent;}
+    .sidebar-link:hover,.sidebar-link.active{color:#00f5ff;background:rgba(0,245,255,.04);border-left-color:#00f5ff;padding-left:24px;}
+    /* Feature card */
+    .feature-item{display:flex;align-items:flex-start;gap:16px;padding:20px;background:#111827;border:1px solid rgba(0,245,255,.1);border-radius:10px;margin-bottom:16px;transition:.3s;}
+    .feature-item:hover{border-color:rgba(0,245,255,.3);}
+    .feature-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    /* Product mini card */
+    .mini-card{background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:10px;overflow:hidden;transition:.3s;}
+    .mini-card:hover{border-color:rgba(0,245,255,.4);transform:translateY(-4px);}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" style="background:rgba(8,11,20,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,245,255,.15);padding:14px 0;z-index:1000;">
+  <div class="container">
+    <a href="index.html" style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;text-decoration:none;letter-spacing:2px;"><i class="fa-solid fa-laptop me-2"></i>Laptop<span style="color:#bf5fff">Zone</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" style="border:1px solid rgba(0,245,255,.2)"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li><a class="nav-lc" href="index.html">Trang Chủ</a></li>
+        <li><a class="nav-lc" href="about.html">Giới Thiệu</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-lc active dropdown-toggle" href="#" data-bs-toggle="dropdown">Dịch Vụ</a>
+          <ul class="dropdown-menu" style="background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:12px;padding:8px;">
+            <li><a class="dropdown-item" href="service1.html" style="color:#00f5ff;font-family:'Rajdhani',sans-serif;padding:10px 16px;border-radius:6px;"><i class="fa-solid fa-gamepad me-2" style="color:#00f5ff"></i>Laptop Gaming</a></li>
+            <li><a class="dropdown-item" href="service2.html" style="color:#94a3b8;font-family:'Rajdhani',sans-serif;padding:10px 16px;border-radius:6px;"><i class="fa-solid fa-briefcase me-2" style="color:#00f5ff"></i>Laptop Văn Phòng</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-lc" href="products.html">Sản Phẩm</a></li>
+        <li><a class="nav-lc" href="index.html#contact">Liên Hệ</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+        <button data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" style="width:38px;height:38px;background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cartCount" style="position:absolute;top:-6px;right:-6px;background:#ff2d78;color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;">0</span>
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#loginModal" style="background:transparent;border:2px solid #00f5ff;color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;border-radius:6px;cursor:pointer;"><i class="fa-solid fa-user me-1"></i>Đăng Nhập</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE BANNER -->
+<div style="padding:120px 0 60px;background:linear-gradient(135deg,#080b14 0%,#0d1220 50%,#080b14 100%);border-bottom:1px solid rgba(0,245,255,.1);position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,#00f5ff,#bf5fff);"></div>
+  <div style="position:absolute;right:-5%;top:-20%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(255,45,120,.06) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;left:-5%;bottom:-20%;width:300px;height:300px;background:radial-gradient(ellipse,rgba(0,245,255,.05) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="container">
+    <nav aria-label="breadcrumb" style="margin-bottom:16px;">
+      <ol class="breadcrumb" style="background:transparent;padding:0;margin:0;">
+        <li class="breadcrumb-item"><a href="index.html" style="color:#00f5ff;font-size:13px;text-decoration:none;">Trang Chủ</a></li>
+        <li class="breadcrumb-item"><a href="#" style="color:#00f5ff;font-size:13px;text-decoration:none;">Dịch Vụ</a></li>
+        <li class="breadcrumb-item active" style="color:#94a3b8;font-size:13px;">Laptop Gaming</li>
+      </ol>
+    </nav>
+    <div class="section-label">Dịch vụ</div>
+    <h1 style="font-family:'Orbitron',sans-serif;font-size:clamp(26px,4vw,52px);font-weight:900;margin-bottom:16px;">
+      <i class="fa-solid fa-gamepad me-3" style="color:#ff2d78;"></i>
+      Laptop <span style="background:linear-gradient(135deg,#00f5ff,#bf5fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Gaming</span>
+    </h1>
+    <p style="color:#94a3b8;max-width:600px;font-size:16px;line-height:1.8;">Hiệu năng đỉnh cao, thiết kế táo bạo — dành cho game thủ thực thụ. Trải nghiệm gaming không giới hạn với những cỗ máy mạnh mẽ nhất.</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<section style="padding:60px 0;">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- NỘI DUNG CHÍNH (col-8) -->
+      <div class="col-lg-8">
+
+        <!-- Giới thiệu dịch vụ -->
+        <div style="background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:16px;padding:36px;margin-bottom:36px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,#ff2d78,#bf5fff);"></div>
+          <h2 style="font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;margin-bottom:16px;">Dịch Vụ Laptop Gaming</h2>
+          <p style="color:#94a3b8;line-height:1.9;margin-bottom:16px;">LaptopZone cung cấp đầy đủ các dòng laptop gaming từ tầm trung đến cao cấp của các thương hiệu hàng đầu: ASUS ROG, Lenovo Legion, MSI, Acer Predator, Razer và nhiều hãng khác.</p>
+          <p style="color:#94a3b8;line-height:1.9;margin-bottom:16px;">Đội ngũ chuyên gia của chúng tôi sẽ tư vấn giúp bạn chọn được chiếc laptop gaming phù hợp nhất với nhu cầu và ngân sách — từ gaming casual đến esports chuyên nghiệp.</p>
+          <p style="color:#94a3b8;line-height:1.9;">Tất cả sản phẩm đều có bảo hành chính hãng, hỗ trợ kỹ thuật 24/7 và chính sách đổi trả linh hoạt trong 7 ngày.</p>
+        </div>
+
+        <!-- Đặc điểm nổi bật -->
+        <h3 style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;margin-bottom:20px;">Tại Sao Chọn LaptopZone?</h3>
+
+        <div class="feature-item">
+          <div class="feature-icon" style="background:rgba(255,45,120,.1);color:#ff2d78;"><i class="fa-solid fa-bolt"></i></div>
+          <div>
+            <h5 style="font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px;">Hiệu Năng Đỉnh Cao</h5>
+            <p style="color:#94a3b8;font-size:14px;line-height:1.7;margin:0;">CPU Intel/AMD thế hệ mới nhất, GPU RTX 4060/4070/4080, RAM DDR5 tốc độ cao đảm bảo trải nghiệm gaming tối ưu ở mọi tựa game.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon" style="background:rgba(0,245,255,.1);color:#00f5ff;"><i class="fa-solid fa-display"></i></div>
+          <div>
+            <h5 style="font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px;">Màn Hình Chất Lượng Cao</h5>
+            <p style="color:#94a3b8;font-size:14px;line-height:1.7;margin:0;">Tần số quét 144Hz đến 360Hz, độ phân giải Full HD đến 4K, độ trễ thấp dưới 3ms — cho trải nghiệm hình ảnh siêu mượt và sắc nét.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon" style="background:rgba(0,255,136,.1);color:#00ff88;"><i class="fa-solid fa-temperature-half"></i></div>
+          <div>
+            <h5 style="font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px;">Tản Nhiệt Hiệu Quả</h5>
+            <p style="color:#94a3b8;font-size:14px;line-height:1.7;margin:0;">Hệ thống tản nhiệt tiên tiến với nhiều quạt và ống dẫn nhiệt, giữ nhiệt độ ổn định ngay cả khi gaming cường độ cao liên tục nhiều giờ.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon" style="background:rgba(191,95,255,.1);color:#bf5fff;"><i class="fa-solid fa-keyboard"></i></div>
+          <div>
+            <h5 style="font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px;">Bàn Phím RGB & Âm Thanh</h5>
+            <p style="color:#94a3b8;font-size:14px;line-height:1.7;margin:0;">Bàn phím cơ hoặc membrane có đèn nền RGB, hành trình phím tối ưu, hệ thống âm thanh Dolby Atmos/DTS cho trải nghiệm gaming toàn diện.</p>
+          </div>
+        </div>
+
+        <!-- Laptop gaming nổi bật -->
+        <h3 style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;margin-top:36px;margin-bottom:20px;">Laptop Gaming Nổi Bật</h3>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="mini-card">
+              <div style="height:160px;overflow:hidden;background:#0d1220;display:flex;align-items:center;justify-content:center;"><img src="images/products/laptop1.jpg" alt="ASUS ROG" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='https://via.placeholder.com/400x160/0d1220/00f5ff?text=ASUS+ROG'"/></div>
+              <div style="padding:16px;">
+                <div style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;">ASUS ROG Strix G16</div>
+                <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">i9 | RTX 4070 | 32GB | 1TB</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;">38.900.000₫</span>
+                  <a href="product-detail.html" style="background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mini-card">
+              <div style="height:160px;overflow:hidden;background:#0d1220;display:flex;align-items:center;justify-content:center;"><img src="images/products/laptop4.jpg" alt="Lenovo Legion" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='https://via.placeholder.com/400x160/0d1220/ffd600?text=Lenovo+Legion'"/></div>
+              <div style="padding:16px;">
+                <div style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;">Lenovo Legion 5 Pro</div>
+                <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">R7 | RTX 4060 | 16GB | 1TB</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;">27.900.000₫</span>
+                  <a href="product-detail.html" style="background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mini-card">
+              <div style="height:160px;overflow:hidden;background:#0d1220;display:flex;align-items:center;justify-content:center;"><img src="images/products/laptop7.jpg" alt="MSI Raider" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='https://via.placeholder.com/400x160/0d1220/ff2d78?text=MSI+Raider'"/></div>
+              <div style="padding:16px;">
+                <div style="font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;">MSI Raider GE78 HX</div>
+                <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">i9 | RTX 4080 | 32GB | 2TB</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <span style="color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;">44.900.000₫</span>
+                  <a href="product-detail.html" style="background:transparent;border:1px solid rgba(0,245,255,.3);color:#00f5ff;font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border-radius:6px;text-decoration:none;">Chi Tiết</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <a href="products.html" style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px;border:2px dashed rgba(0,245,255,.2);border-radius:10px;color:#00f5ff;text-decoration:none;width:100%;text-align:center;transition:.3s;">
+              <i class="fa-solid fa-arrow-right" style="font-size:24px;"></i>
+              <span style="font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">Xem Tất Cả</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR (col-4) -->
+      <div class="col-lg-4">
+
+        <!-- Danh sách dịch vụ -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><i class="fa-solid fa-list me-2"></i>Tất Cả Dịch Vụ</div>
+          <div style="padding:8px 0;">
+            <a href="service1.html" class="sidebar-link active"><span><i class="fa-solid fa-gamepad me-2"></i>Laptop Gaming</span><i class="fa-solid fa-chevron-right" style="font-size:11px;"></i></a>
+            <a href="service2.html" class="sidebar-link"><span><i class="fa-solid fa-briefcase me-2"></i>Laptop Văn Phòng</span><i class="fa-solid fa-chevron-right" style="font-size:11px;"></i></a>
+            <a href="service1.html" class="sidebar-link"><span><i class="fa-solid fa-pen-ruler me-2"></i>Laptop Đồ Họa</span><i class="fa-solid fa-chevron-right" style="font-size:11px;"></i></a>
+            <a href="service2.html" class="sidebar-link"><span><i class="fa-solid fa-graduation-cap me-2"></i>Laptop Sinh Viên</span><i class="fa-solid fa-chevron-right" style="font-size:11px;"></i></a>
+          </div>
+        </div>
+
+        <!-- Tư vấn -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><i class="fa-solid fa-headset me-2"></i>Tư Vấn Miễn Phí</div>
+          <div style="padding:20px;">
+            <p style="color:#94a3b8;font-size:13px;line-height:1.7;margin-bottom:16px;">Chuyên gia của chúng tôi sẵn sàng tư vấn giúp bạn chọn laptop phù hợp nhất!</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+              <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#94a3b8;"><i class="fa-solid fa-phone" style="color:#00f5ff;width:16px;"></i>1900 1234</div>
+              <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#94a3b8;"><i class="fa-solid fa-clock" style="color:#00f5ff;width:16px;"></i>8:00 – 21:00 mỗi ngày</div>
+            </div>
+            <a href="index.html#contact" style="display:block;text-align:center;background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px;border-radius:6px;text-decoration:none;">Liên Hệ Ngay</a>
+          </div>
+        </div>
+
+        <!-- Thương hiệu -->
+        <div class="sidebar-widget">
+          <div class="sidebar-title"><i class="fa-solid fa-star me-2"></i>Thương Hiệu Gaming</div>
+          <div style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:#0d1220;border:1px solid rgba(0,245,255,.1);border-radius:8px;padding:12px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:#94a3b8;transition:.3s;">ASUS ROG</div>
+            <div style="background:#0d1220;border:1px solid rgba(0,245,255,.1);border-radius:8px;padding:12px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:#94a3b8;">Lenovo Legion</div>
+            <div style="background:#0d1220;border:1px solid rgba(0,245,255,.1);border-radius:8px;padding:12px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:#94a3b8;">MSI Gaming</div>
+            <div style="background:#0d1220;border:1px solid rgba(0,245,255,.1);border-radius:8px;padding:12px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:#94a3b8;">Acer Predator</div>
+            <div style="background:#0d1220;border:1px solid rgba(0,245,255,.1);border-radius:8px;padding:12px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:#94a3b8;">HP OMEN</div>
+            <div style="background:#0d1220;border:1px solid rgba(0,245,255,.1);border-radius:8px;padding:12px;text-align:center;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:#94a3b8;">Razer</div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="background:linear-gradient(135deg,rgba(0,245,255,.08),rgba(191,95,255,.08));border:1px solid rgba(0,245,255,.2);border-radius:12px;padding:24px;text-align:center;">
+          <i class="fa-solid fa-gamepad" style="font-size:40px;color:#ff2d78;margin-bottom:12px;display:block;"></i>
+          <h5 style="font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;">Đăng Ký Tư Vấn</h5>
+          <p style="color:#94a3b8;font-size:13px;margin-bottom:16px;">Nhận tư vấn chuyên sâu và ưu đãi đặc biệt!</p>
+          <button data-bs-toggle="modal" data-bs-target="#modalService" data-service="pro"
+            style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border-radius:6px;cursor:pointer;width:100%;">
+            <i class="fa-solid fa-clipboard-list me-2"></i>Đăng Ký Ngay
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0d1220;border-top:1px solid rgba(0,245,255,.1);padding:60px 0 0;position:relative;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(135deg,#00f5ff,#bf5fff);"></div>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4"><a href="index.html" style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;text-decoration:none;display:inline-block;margin-bottom:12px;"><i class="fa-solid fa-laptop me-2"></i>Laptop<span style="color:#bf5fff">Zone</span></a><p style="color:#94a3b8;font-size:14px;line-height:1.8;">Chuyên cung cấp laptop chính hãng, bảo hành toàn quốc.</p></div>
+      <div class="col-lg-2 col-6"><p style="font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#00f5ff;margin-bottom:16px;">Liên Kết</p><ul style="list-style:none;padding:0;"><li style="margin-bottom:8px;"><a href="index.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Trang Chủ</a></li><li style="margin-bottom:8px;"><a href="about.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Giới Thiệu</a></li><li><a href="products.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Sản Phẩm</a></li></ul></div>
+      <div class="col-lg-2 col-6"><p style="font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#00f5ff;margin-bottom:16px;">Dịch Vụ</p><ul style="list-style:none;padding:0;"><li style="margin-bottom:8px;"><a href="service1.html" style="color:#00f5ff;font-size:14px;text-decoration:none;">Laptop Gaming</a></li><li><a href="service2.html" style="color:#94a3b8;font-size:14px;text-decoration:none;">Laptop Văn Phòng</a></li></ul></div>
+      <div class="col-lg-4"><p style="font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#00f5ff;margin-bottom:16px;">Liên Hệ</p><p style="color:#94a3b8;font-size:13px;margin-bottom:8px;"><i class="fa-solid fa-phone me-2" style="color:#00f5ff;"></i>1900 1234</p><p style="color:#94a3b8;font-size:13px;margin-bottom:8px;"><i class="fa-solid fa-envelope me-2" style="color:#00f5ff;"></i>support@laptopzone.vn</p><p style="color:#94a3b8;font-size:13px;"><i class="fa-solid fa-location-dot me-2" style="color:#00f5ff;"></i>123 Nguyễn Văn Linh, Q.7, TP.HCM</p></div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(0,245,255,.1);padding:20px 0;margin-top:40px;text-align:center;color:#4a5568;font-size:13px;">© <span id="yr"></span> <span style="color:#00f5ff;">LaptopZone</span>. Bảo lưu mọi quyền.</div>
+</footer>
+
+<!-- MODAL ĐĂNG KÝ (copy từ index) -->
+<div class="modal fade" id="modalService" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="background:#111827;border:1px solid rgba(0,245,255,.2);border-radius:16px;">
+      <div class="modal-header" style="border-bottom:1px solid rgba(0,245,255,.1);padding:24px 28px;">
+        <h5 class="modal-title" style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;"><i class="fa-solid fa-clipboard-list me-2" style="color:#00f5ff;"></i>Đăng Ký Dịch Vụ</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="padding:28px;">
+        <form id="modalServiceForm" novalidate>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Họ Và Tên <span style="color:#ff2d78">*</span></label><input type="text" class="form-control" name="modalName" id="modalName" placeholder="Nguyễn Văn A" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;font-size:14px;"/><span id="errModalName" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+            <div class="col-md-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Số Điện Thoại <span style="color:#ff2d78">*</span></label><input type="tel" class="form-control" name="modalPhone" id="modalPhone" placeholder="0909 123 456" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;font-size:14px;"/><span id="errModalPhone" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+            <div class="col-md-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Email <span style="color:#ff2d78">*</span></label><input type="email" class="form-control" name="modalEmail" id="modalEmail" placeholder="email@example.com" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;font-size:14px;"/><span id="errModalEmail" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+          </div>
+          <div class="mb-4">
+            <label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;display:block;">Dịch Vụ <span style="color:#ff2d78">*</span></label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <label style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;"><input type="checkbox" name="services[]" id="chk-basic" value="basic" style="accent-color:#00f5ff;width:16px;height:16px;"/><span style="font-size:14px;color:#94a3b8;"><i class="fa-solid fa-star me-1" style="color:#ffd600;"></i>Gói Basic</span></label>
+              <label style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;"><input type="checkbox" name="services[]" id="chk-pro" value="pro" style="accent-color:#00f5ff;width:16px;height:16px;"/><span style="font-size:14px;color:#94a3b8;"><i class="fa-solid fa-crown me-1" style="color:#00f5ff;"></i>Gói Pro</span></label>
+              <label style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;"><input type="checkbox" name="services[]" id="chk-premium" value="premium" style="accent-color:#00f5ff;width:16px;height:16px;"/><span style="font-size:14px;color:#94a3b8;"><i class="fa-solid fa-gem me-1" style="color:#bf5fff;"></i>Gói Premium</span></label>
+              <label style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;"><input type="checkbox" name="services[]" id="chk-support" value="support" style="accent-color:#00f5ff;width:16px;height:16px;"/><span style="font-size:14px;color:#94a3b8;"><i class="fa-solid fa-headset me-1" style="color:#00ff88;"></i>Hỗ Trợ Kỹ Thuật</span></label>
+            </div>
+            <span id="errModalService" style="color:#ff2d78;font-size:12px;margin-top:8px;display:block;"></span>
+          </div>
+          <div><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Yêu Cầu Khác</label><textarea class="form-control" name="modalNote" rows="3" placeholder="Mô tả thêm..." style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;font-size:14px;resize:vertical;"></textarea></div>
+        </form>
+      </div>
+      <div class="modal-footer" style="border-top:1px solid rgba(0,245,255,.1);padding:20px 28px;gap:12px;">
+        <button type="button" data-bs-dismiss="modal" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:#94a3b8;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;padding:10px 24px;border-radius:6px;cursor:pointer;"><i class="fa-solid fa-xmark me-2"></i>Đóng</button>
+        <button type="button" id="btnSubmitModal" style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:10px 28px;border-radius:6px;cursor:pointer;"><i class="fa-solid fa-paper-plane me-2"></i>Gửi Đăng Ký</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART + LOGIN MODAL -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" style="background:#111827;border-left:1px solid rgba(0,245,255,.15);max-width:400px;"><div class="offcanvas-header" style="border-bottom:1px solid rgba(0,245,255,.1);padding:20px 24px;"><h5 style="font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;margin:0;"><i class="fa-solid fa-cart-shopping me-2"></i>Giỏ Hàng</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button></div><div class="offcanvas-body" id="cartBody" style="padding:20px;"><div id="cartEmpty" class="text-center py-5"><i class="fa-solid fa-cart-shopping" style="font-size:48px;color:rgba(0,245,255,.2);"></i><p style="color:#4a5568;margin-top:16px;font-size:14px;">Giỏ hàng đang trống</p></div><div id="cartItems"></div></div><div id="cartFooter" style="padding:16px 24px 24px;display:none;"><div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid rgba(0,245,255,.1);font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;"><span>Tổng:</span><span id="cartTotal" style="color:#00f5ff;font-size:22px;"></span></div><button style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px;border-radius:6px;cursor:pointer;width:100%;"><i class="fa-solid fa-credit-card me-2"></i>Thanh Toán</button></div></div>
+<div class="modal fade" id="loginModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content" style="background:#111827;border:1px solid rgba(0,245,255,.2);border-radius:16px;"><div class="modal-header" style="border-bottom:1px solid rgba(0,245,255,.1);padding:24px 28px;"><h5 class="modal-title" style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;"><i class="fa-solid fa-user-shield me-2" style="color:#00f5ff;"></i>Đăng Nhập</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body" style="padding:28px;"><form id="loginForm" novalidate><div class="mb-3"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Email</label><input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="email@example.com" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="loginEmailErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div><div class="mb-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Mật Khẩu</label><input type="password" class="form-control" name="loginPass" id="loginPass" placeholder="Nhập mật khẩu" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="loginPassErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div><button type="submit" style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px;border-radius:6px;cursor:pointer;width:100%;"><i class="fa-solid fa-right-to-bracket me-2"></i>Đăng Nhập</button></form></div></div></div></div>
+
+<button id="backToTop" style="position:fixed;bottom:32px;right:32px;width:44px;height:44px;background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.3);border-radius:10px;color:#00f5ff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;z-index:999;"><i class="fa-solid fa-chevron-up"></i></button>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+$('#yr').text(new Date().getFullYear());
+$(window).on('scroll',function(){if($(this).scrollTop()>60){$('#backToTop').css({opacity:1,pointerEvents:'auto'});}else{$('#backToTop').css({opacity:0,pointerEvents:'none'});}});
+$('#backToTop').on('click',function(){$('html,body').animate({scrollTop:0},500);});
+</script>
+</body>
+</html>
