@@ -100,6 +100,93 @@ function clearCart() {
 }
 
 /* ══════════════════════════════════════
+   CHECKOUT / THANH TOÁN
+══════════════════════════════════════ */
+function validateCheckoutFields(data) {
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return data.fullName && data.email && emailRe.test(data.email) && data.phone && data.address && data.paymentMethod;
+}
+
+function closeCheckoutDialog() {
+    var modalEl = document.getElementById('checkoutModal');
+    if (modalEl) {
+        var modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+    }
+    $('#checkoutOverlay').remove();
+}
+
+function openCheckoutDialog() {
+    if (cart.length === 0) {
+        showToast('Giỏ hàng đang trống. Vui lòng thêm sản phẩm trước khi thanh toán.', 'error');
+        return;
+    }
+
+    if (!$('#checkoutModal').length) {
+        var modalHtml = '<div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">'
+            + '<div class="modal-dialog modal-dialog-centered modal-lg">'
+            + '<div class="modal-content" style="background:#111827;border:1px solid rgba(0,245,255,.15);border-radius:20px;color:#e8f0fe;">'
+            + '<div class="modal-header" style="border-bottom:1px solid rgba(0,245,255,.08);">'
+            + '<h5 class="modal-title" style="font-family:\'Rajdhani\',sans-serif;font-size:20px;font-weight:700;color:#00f5ff;">Thanh Toán</h5>'
+            + '<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>'
+            + '</div>'
+            + '<div class="modal-body" style="padding:24px;">'
+            + '<form id="checkoutForm" novalidate style="display:grid;gap:16px;">'
+            + '<div style="display:grid;gap:8px;"><label style="font-size:13px;color:#94a3b8;">Họ và tên</label><input name="fullName" type="text" placeholder="Nhập họ tên" style="width:100%;border:1px solid rgba(0,245,255,.15);border-radius:10px;padding:12px;background:#0d1220;color:#e8f0fe;" required></div>'
+            + '<div style="display:grid;gap:8px;"><label style="font-size:13px;color:#94a3b8;">Email</label><input name="email" type="email" placeholder="email@example.com" style="width:100%;border:1px solid rgba(0,245,255,.15);border-radius:10px;padding:12px;background:#0d1220;color:#e8f0fe;" required></div>'
+            + '<div style="display:grid;gap:8px;"><label style="font-size:13px;color:#94a3b8;">Số điện thoại</label><input name="phone" type="tel" placeholder="0xxxxxxxxx" style="width:100%;border:1px solid rgba(0,245,255,.15);border-radius:10px;padding:12px;background:#0d1220;color:#e8f0fe;" required></div>'
+            + '<div style="display:grid;gap:8px;"><label style="font-size:13px;color:#94a3b8;">Địa chỉ giao hàng</label><textarea name="address" rows="3" placeholder="Nhập địa chỉ" style="width:100%;border:1px solid rgba(0,245,255,.15);border-radius:10px;padding:12px;background:#0d1220;color:#e8f0fe;resize:none;" required></textarea></div>'
+            + '<div style="display:grid;gap:8px;"><label style="font-size:13px;color:#94a3b8;">Phương thức</label><select name="paymentMethod" style="width:100%;border:1px solid rgba(0,245,255,.15);border-radius:10px;padding:12px;background:#0d1220;color:#e8f0fe;" required>'
+            + '<option value="">Chọn phương thức</option>'
+            + '<option value="COD">Thanh toán khi nhận hàng</option>'
+            + '<option value="Bank">Chuyển khoản ngân hàng</option>'
+            + '<option value="Card">Thẻ tín dụng / thẻ ghi nợ</option>'
+            + '</select></div>'
+            + '<div id="checkoutError" style="color:#ff2d78;font-size:13px;min-height:20px;line-height:1.4;"></div>'
+            + '<button type="submit" style="background:#00f5ff;border:none;color:#080b14;font-family:\'Rajdhani\',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:10px;cursor:pointer;">Xác nhận thanh toán</button>'
+            + '</form>'
+            + '</div>'
+            + '</div>'
+            + '</div>'
+            + '</div>';
+
+        $('body').append(modalHtml);
+        $('#checkoutModal').on('shown.bs.modal', function () {
+            $('#checkoutModal input[name="fullName"]').focus();
+        });
+        $('#checkoutModal').on('hidden.bs.modal', function () {
+            $('#checkoutError').text('');
+            $('#checkoutForm')[0].reset();
+        });
+        $('#checkoutModal').find('#checkoutForm').on('submit', function (e) {
+            e.preventDefault();
+            var data = {
+                fullName: $.trim($(this).find('[name="fullName"]').val()),
+                email: $.trim($(this).find('[name="email"]').val()),
+                phone: $.trim($(this).find('[name="phone"]').val()),
+                address: $.trim($(this).find('[name="address"]').val()),
+                paymentMethod: $(this).find('[name="paymentMethod"]').val()
+            };
+
+            if (!validateCheckoutFields(data)) {
+                $('#checkoutError').text('Vui lòng điền đủ thông tin hợp lệ để hoàn tất thanh toán.');
+                return;
+            }
+
+            var modalEl = document.getElementById('checkoutModal');
+            var modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+            clearCart();
+            showToast('🎉 Thanh toán thành công! Đơn hàng đang được xử lý.', 'success');
+        });
+    }
+
+    var modalEl = document.getElementById('checkoutModal');
+    var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    modal.show();
+}
+
+/* ══════════════════════════════════════
    TÍNH TỔNG TIỀN
 ══════════════════════════════════════ */
 function getCartTotal() {
@@ -256,6 +343,11 @@ $(function () {
         if (confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')) {
             clearCart();
         }
+    });
+
+    /* Nút thanh toán */
+    $(document).on('click', 'button[data-checkout]', function () {
+        openCheckoutDialog();
     });
 
     /* Hover effect nút tăng/giảm */
