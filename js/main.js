@@ -170,6 +170,133 @@ $(function () {
         });
     }
 
+    /* ── 7.5. ĐĂNG KÝ / ĐĂNG NHẬP LOCALSTORAGE ── */
+    function getUsers() {
+        return JSON.parse(localStorage.getItem('lz_users') || '[]');
+    }
+
+    function saveUsers(users) {
+        localStorage.setItem('lz_users', JSON.stringify(users));
+    }
+
+    function findUserByEmail(email) {
+        return getUsers().find(function (user) {
+            return user.email.toLowerCase() === email.toLowerCase();
+        });
+    }
+
+    function registerUser(user) {
+        var users = getUsers();
+        users.push(user);
+        saveUsers(users);
+    }
+
+    function injectRegisterModal() {
+        if (!$('#loginModal').length || $('#registerModal').length) return;
+
+        var registerHtml = `
+        <div class="modal fade" id="registerModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background:#111827;border:1px solid rgba(0,245,255,.2);border-radius:16px;">
+              <div class="modal-header" style="border-bottom:1px solid rgba(0,245,255,.1);padding:24px 28px;">
+                <h5 class="modal-title" style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;"><i class="fa-solid fa-user-plus me-2" style="color:#00f5ff;"></i>Đăng Ký</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body" style="padding:28px;">
+                <form id="registerForm" novalidate>
+                  <div class="mb-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Họ và tên</label><input type="text" class="form-control" name="registerName" id="registerName" placeholder="Nguyễn Văn A" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="registerNameErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+                  <div class="mb-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Email</label><input type="email" class="form-control" name="registerEmail" id="registerEmail" placeholder="email@example.com" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="registerEmailErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+                  <div class="mb-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Mật khẩu</label><input type="password" class="form-control" name="registerPass" id="registerPass" placeholder="Tối thiểu 6 ký tự" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="registerPassErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+                  <div class="mb-4"><label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;display:block;">Xác nhận mật khẩu</label><input type="password" class="form-control" name="registerConfirm" id="registerConfirm" placeholder="Nhập lại mật khẩu" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;color:#e8f0fe;padding:12px 16px;"/><span id="registerConfirmErr" style="color:#ff2d78;font-size:12px;margin-top:4px;display:block;"></span></div>
+                  <button type="submit" style="background:#00f5ff;border:none;color:#080b14;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px;border-radius:6px;cursor:pointer;width:100%;"><i class="fa-solid fa-user-plus me-2"></i>Đăng Ký</button>
+                </form>
+                <div class="text-center" style="margin-top:14px;color:#94a3b8;font-size:13px;">
+                  Đã có tài khoản? <a href="#" id="openLoginFromRegister" style="color:#00f5ff;text-decoration:none;">Đăng nhập</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+
+        $('body').append(registerHtml);
+    }
+
+    function appendRegisterLinkToLogin() {
+        if (!$('#loginModal').length) return;
+        var $form = $('#loginModal').find('#loginForm');
+        if (!$form.length || $form.find('#openRegisterModal').length) return;
+
+        var html = '<div class="text-center" style="margin-top:14px;color:#94a3b8;font-size:13px;">Chưa có tài khoản? <a href="#" id="openRegisterModal" style="color:#00f5ff;text-decoration:none;">Đăng ký</a></div>';
+        $form.append(html);
+
+        $(document).on('click', '#openRegisterModal', function (e) {
+            e.preventDefault();
+            var loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+            if (loginModal) loginModal.hide();
+            var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+            registerModal.show();
+        });
+
+        $(document).on('click', '#openLoginFromRegister', function (e) {
+            e.preventDefault();
+            var registerModal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+            if (registerModal) registerModal.hide();
+            var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        });
+    }
+
+    injectRegisterModal();
+    appendRegisterLinkToLogin();
+
+    if ($('#registerForm').length) {
+        $('#registerForm').validate({
+            rules: {
+                registerName: { required: true, noNumbers: true },
+                registerEmail: { required: true, email: true },
+                registerPass: { required: true, minlength: 6 },
+                registerConfirm: { required: true, equalTo: '#registerPass' }
+            },
+            messages: {
+                registerName: { required: 'Vui lòng nhập họ tên', noNumbers: 'Tên không được chứa số' },
+                registerEmail: { required: 'Vui lòng nhập email', email: 'Email không hợp lệ' },
+                registerPass: { required: 'Vui lòng nhập mật khẩu', minlength: 'Mật khẩu tối thiểu 6 ký tự' },
+                registerConfirm: { required: 'Vui lòng xác nhận mật khẩu', equalTo: 'Mật khẩu không khớp' }
+            },
+            errorPlacement: function (error, element) {
+                var map = {
+                    registerName: '#registerNameErr',
+                    registerEmail: '#registerEmailErr',
+                    registerPass: '#registerPassErr',
+                    registerConfirm: '#registerConfirmErr'
+                };
+                var id = element.attr('id');
+                if (map[id]) { error.appendTo(map[id]); }
+                else { error.insertAfter(element); }
+            },
+            highlight: function (el) { $(el).css('border-color', '#ff2d78'); },
+            unhighlight: function (el) { $(el).css('border-color', 'rgba(0,245,255,.15)'); },
+            submitHandler: function () {
+                var name = $.trim($('#registerName').val());
+                var email = $.trim($('#registerEmail').val()).toLowerCase();
+                var password = $('#registerPass').val();
+
+                if (findUserByEmail(email)) {
+                    $('#registerEmailErr').text('Email này đã được sử dụng. Vui lòng đăng nhập hoặc dùng email khác.');
+                    return;
+                }
+
+                registerUser({ name: name, email: email, password: password });
+                localStorage.setItem('lz_user', JSON.stringify({ email: email, name: name, loggedIn: true }));
+                var modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+                if (modal) modal.hide();
+                updateLoginUI();
+                showToast('🎉 Đăng ký thành công! Xin chào ' + name + '.', 'success');
+                $('#registerForm')[0].reset();
+            }
+        });
+    }
+
     /* ── 8. LOGIN FORM VALIDATION ── */
     if ($('#loginForm').length) {
         $('#loginForm').validate({
@@ -187,12 +314,26 @@ $(function () {
                 if (map[id]) { error.appendTo(map[id]); }
             },
             submitHandler: function () {
-                var email = $('#loginEmail').val();
-                localStorage.setItem('lz_user', JSON.stringify({ email: email, loggedIn: true }));
+                var email = $.trim($('#loginEmail').val()).toLowerCase();
+                var password = $('#loginPass').val();
+                var user = findUserByEmail(email);
+
+                if (!user) {
+                    $('#loginEmailErr').text('Email chưa được đăng ký. Vui lòng đăng ký trước.');
+                    return;
+                }
+                if (user.password !== password) {
+                    $('#loginPassErr').text('Mật khẩu không chính xác. Vui lòng thử lại.');
+                    return;
+                }
+
+                localStorage.setItem('lz_user', JSON.stringify({ email: user.email, name: user.name, loggedIn: true }));
                 var modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
                 if (modal) modal.hide();
                 updateLoginUI();
-                showToast('👋 Xin chào ' + email.split('@')[0] + '! Đăng nhập thành công.', 'success');
+                showToast('👋 Xin chào ' + user.name + '! Đăng nhập thành công.', 'success');
+                $('#loginEmailErr, #loginPassErr').empty();
+                $('#loginForm')[0].reset();
             }
         });
     }
@@ -201,7 +342,7 @@ $(function () {
     function updateLoginUI() {
         var user = JSON.parse(localStorage.getItem('lz_user') || 'null');
         if (user && user.loggedIn) {
-            var name = user.email.split('@')[0];
+            var name = user.name || user.email.split('@')[0];
             $('[data-bs-target="#loginModal"]')
                 .html('<i class="fa-solid fa-user-check me-1"></i>' + name)
                 .off('click')
